@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 import { MongoClient } from 'mongodb';
 
 export async function GET() {
-  const dbPassword = "TTBfycDpQRCtlmla";
+  const dbPassword = process.env.MONGO_DB_PASSWORD;
   const uri = `mongodb+srv://WebPageUser:${dbPassword}@moonshinecluster-prod.bsp5mgb.mongodb.net/?retryWrites=true&w=majority&appName=MoonshineCluster-Prod`;
   let client;
   try {
@@ -13,6 +13,7 @@ export async function GET() {
     await client.db().command({ ping: 1 });
     return NextResponse.json(true);
   } catch (error) {
+    console.error('HealthCheck API error: ', error);
     return NextResponse.json(false);
   } finally {
     if (client) {
