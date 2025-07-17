@@ -4,6 +4,7 @@ import { NextResponse } from 'next/server';
 import { MongoClient } from 'mongodb';
 
 export async function GET() {
+  console.log('HealthCheck API was called');
   const dbPassword = process.env.MONGO_DB_PASSWORD;
   const uri = `mongodb+srv://WebPageUser:${dbPassword}@moonshinecluster-prod.bsp5mgb.mongodb.net/?retryWrites=true&w=majority&appName=MoonshineCluster-Prod`;
   let client;
