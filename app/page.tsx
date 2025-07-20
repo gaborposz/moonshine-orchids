@@ -7,13 +7,9 @@ export default function Home() {
 
   useEffect(() => {
     fetch("/api/healthcheck")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data === true) {
-          setBackendStatus("Backend is online");
-        } else {
-          setBackendStatus("Backend error");
-        }
+      .then(async (res) => {
+        const data = await res.json();
+        setBackendStatus(data.message);
       })
       .catch(() => {
         setBackendStatus("Backend is offline");
