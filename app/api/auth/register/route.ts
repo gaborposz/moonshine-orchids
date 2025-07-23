@@ -4,6 +4,7 @@ import { NextResponse } from 'next/server';
 // @ts-ignore: No types for bcrypt
 import { hash } from 'bcrypt';
 import { MongoClient } from 'mongodb';
+import { DB_NAME, USERS_COLLECTION } from '@/lib/configs/db/constants';
 
 const uri = process.env.MONGO_DB_CONNECTION_STRING as string;
 
@@ -15,7 +16,7 @@ export async function POST(req: Request) {
     }
     const client = new MongoClient(uri);
     await client.connect();
-    const usersCollection = client.db().collection('users');
+    const usersCollection = client.db(DB_NAME).collection(USERS_COLLECTION);
     const existingUser = await usersCollection.findOne({ email });
     if (existingUser) {
       await client.close();

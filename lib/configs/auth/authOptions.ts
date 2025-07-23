@@ -4,6 +4,7 @@ import clientPromise from "@/lib/mongodb";
 // @ts-ignore: No types for bcrypt
 import { compare } from "bcrypt";
 import { MongoClient } from "mongodb";
+import { DB_NAME, USERS_COLLECTION } from "../db/constants";
 
 const uri = process.env.MONGO_DB_CONNECTION_STRING as string;
 
@@ -22,7 +23,7 @@ export const authOptions = {
         }
         const client = new MongoClient(uri);
         await client.connect();
-        const usersCollection = client.db().collection("users");
+        const usersCollection = client.db(DB_NAME).collection(USERS_COLLECTION);
         const user = await usersCollection.findOne({ email: credentials.email });
         if (!user) {
           await client.close();
