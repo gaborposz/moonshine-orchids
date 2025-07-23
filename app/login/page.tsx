@@ -44,15 +44,15 @@ function LoginContent() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-4">
-      <form onSubmit={handleSubmit} className="w-full max-w-sm bg-white p-8 rounded shadow">
-        <h2 className="text-2xl font-bold mb-4">Login</h2>
+      <form onSubmit={handleSubmit} className="w-full max-w-sm bg-gray-800 p-8 rounded shadow">
+        <h2 className="text-2xl font-bold mb-4 text-white">Login</h2>
         <input
           type="email"
           name="email"
           placeholder="Email"
           value={form.email}
           onChange={handleChange}
-          className="w-full mb-2 p-2 border rounded"
+          className="w-full mb-2 p-2 border rounded bg-gray-700 text-white placeholder-gray-300 border-gray-600"
           required
         />
         <input
@@ -61,21 +61,21 @@ function LoginContent() {
           placeholder="Password"
           value={form.password}
           onChange={handleChange}
-          className="w-full mb-4 p-2 border rounded"
+          className="w-full mb-4 p-2 border rounded bg-gray-700 text-white placeholder-gray-300 border-gray-600"
           required
         />
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 disabled:opacity-50"
+          className="w-full bg-blue-700 text-white py-2 rounded hover:bg-blue-800 disabled:opacity-50"
           disabled={loading}
         >
           {loading ? "Logging in..." : "Login"}
         </button>
         {(error || urlError) && (
-          <p className="text-red-600 mt-2">{error || "Invalid credentials"}</p>
+          <p className="text-red-400 mt-2">{error || "Invalid credentials"}</p>
         )}
-        <p className="mt-4 text-sm">
-          Don't have an account? <a href="/register" className="text-blue-600 underline">Register</a>
+        <p className="mt-4 text-sm text-gray-300">
+          Don't have an account? <a href="/register" className="text-blue-400 underline hover:text-blue-300">Register</a>
         </p>
       </form>
     </main>

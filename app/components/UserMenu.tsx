@@ -14,7 +14,7 @@ export default function UserMenu() {
         <span className="font-semibold">Hello, {session.user.name || session.user.email}!</span>
         <button
           onClick={() => signOut({ callbackUrl: "/" })}
-          className="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300"
+          className="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-800"
         >
           Logout
         </button>
