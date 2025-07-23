@@ -18,24 +18,28 @@ export const authOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
-          throw new Error("Missing email or password");
-        }
-        const client = new MongoClient(uri);
-        await client.connect();
-        const usersCollection = client.db(DB_NAME).collection(USERS_COLLECTION);
-        const user = await usersCollection.findOne({ email: credentials.email });
-        if (!user) {
+        try {
+          if (!credentials?.email || !credentials?.password) {
+            throw new Error("Missing email or password");
+          }
+          const client = new MongoClient(uri);
+          await client.connect();
+          const usersCollection = client.db(DB_NAME).collection(USERS_COLLECTION);
+          const user = await usersCollection.findOne({ email: credentials.email });
+          if (!user) {
+            await client.close();
+            throw new Error("No user found with this email");
+          }
+          const isValid = await compare(credentials.password, user.password);
           await client.close();
-          throw new Error("No user found with this email");
+          if (!isValid) {
+            throw new Error("Invalid password");
+          }
+          return { id: user._id.toString(), email: user.email, name: user.name };
+        } catch (error) {
+          console.error('Auth error:', error);
+          throw error;
         }
-        const isValid = await compare(credentials.password, user.password);
-        await client.close();
-        if (!isValid) {
-          throw new Error("Invalid password");
-        }
-        // Return user object (without password)
-        return { id: user._id.toString(), email: user.email, name: user.name };
       },
     }),
   ],
@@ -45,4 +49,5 @@ export const authOptions = {
     signIn: "/login",
     error: "/login", // Error code passed in query string as ?error=
   },
+  debug: process.env.NODE_ENV === 'development',
 };

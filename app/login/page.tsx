@@ -18,15 +18,24 @@ function LoginContent() {
     e.preventDefault();
     setLoading(true);
     setError("");
-    const res = await signIn("credentials", {
-      ...form,
-      redirect: false,
-    });
-    setLoading(false);
-    if (res?.ok) {
-      router.push("/");
-    } else {
-      setError(res?.error || "Login failed");
+    
+    try {
+      const res = await signIn("credentials", {
+        ...form,
+        redirect: false,
+        callbackUrl: "/"
+      });
+
+      if (res?.error) {
+        setError(res.error);
+      } else if (res?.url) {
+        router.push(res.url);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      setError("An unexpected error occurred");
+    } finally {
+      setLoading(false);
     }
   };
 
