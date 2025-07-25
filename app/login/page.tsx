@@ -22,6 +22,7 @@ function LoginContent() {
     try {
       const res = await signIn("credentials", {
         ...form,
+        action: 'login',
         redirect: false,
         callbackUrl: "/"
       });
