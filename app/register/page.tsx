@@ -75,8 +75,8 @@ export default function RegisterPage() {
         >
           {loading ? "Registering..." : "Register"}
         </button>
-        {error && <p className="text-red-400 mt-2">{error}</p>}
-        {success && <p className="text-green-400 mt-2">{success}</p>}
+        {error && <p data-testid="register-error" className="text-red-400 mt-2">{error}</p>}
+        {success && <p data-testid="register-success" className="text-green-400 mt-2">{success}</p>}
         <p className="mt-4 text-sm text-gray-300">
           Already have an account? <a href="/login" className="text-blue-400 underline hover:text-blue-300">Login</a>
         </p>

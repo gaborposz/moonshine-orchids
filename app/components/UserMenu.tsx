@@ -10,7 +10,7 @@ export default function UserMenu() {
 
   if (session?.user) {
     return (
-      <div className="flex items-center gap-4 mt-4">
+      <div data-testid="user-menu" className="flex items-center gap-4 mt-4">
         <span className="font-semibold">Hello, {session.user.name || session.user.email}!</span>
         <button
           onClick={() => signOut({ callbackUrl: "/" })}
