@@ -73,7 +73,7 @@ function LoginContent() {
           {loading ? "Logging in..." : "Login"}
         </button>
         {(error || urlError) && (
-          <p className="text-red-400 mt-2">{error || "Invalid credentials"}</p>
+          <p data-testid="login-error" className="text-red-400 mt-2">{error || "Invalid credentials"}</p>
         )}
         <p className="mt-4 text-sm text-gray-300">
           Don't have an account? <a href="/register" className="text-blue-400 underline hover:text-blue-300">Register</a>
