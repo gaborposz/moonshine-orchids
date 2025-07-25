@@ -39,15 +39,15 @@ export default function RegisterPage() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-4">
-      <form onSubmit={handleSubmit} className="w-full max-w-sm bg-white p-8 rounded shadow">
-        <h2 className="text-2xl font-bold mb-4">Register</h2>
+      <form onSubmit={handleSubmit} className="w-full max-w-sm bg-gray-800 p-8 rounded shadow">
+        <h2 className="text-2xl font-bold mb-4 text-white">Register</h2>
         <input
           type="text"
           name="name"
           placeholder="Name"
           value={form.name}
           onChange={handleChange}
-          className="w-full mb-2 p-2 border rounded"
+          className="w-full mb-2 p-2 border rounded bg-gray-700 text-white placeholder-gray-300 border-gray-600"
           required
         />
         <input
@@ -56,7 +56,7 @@ export default function RegisterPage() {
           placeholder="Email"
           value={form.email}
           onChange={handleChange}
-          className="w-full mb-2 p-2 border rounded"
+          className="w-full mb-2 p-2 border rounded bg-gray-700 text-white placeholder-gray-300 border-gray-600"
           required
         />
         <input
@@ -65,20 +65,20 @@ export default function RegisterPage() {
           placeholder="Password"
           value={form.password}
           onChange={handleChange}
-          className="w-full mb-4 p-2 border rounded"
+          className="w-full mb-4 p-2 border rounded bg-gray-700 text-white placeholder-gray-300 border-gray-600"
           required
         />
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 disabled:opacity-50"
+          className="w-full bg-blue-700 text-white py-2 rounded hover:bg-blue-800 disabled:opacity-50"
           disabled={loading}
         >
           {loading ? "Registering..." : "Register"}
         </button>
-        {error && <p className="text-red-600 mt-2">{error}</p>}
-        {success && <p className="text-green-600 mt-2">{success}</p>}
-        <p className="mt-4 text-sm">
-          Already have an account? <a href="/login" className="text-blue-600 underline">Login</a>
+        {error && <p className="text-red-400 mt-2">{error}</p>}
+        {success && <p className="text-green-400 mt-2">{success}</p>}
+        <p className="mt-4 text-sm text-gray-300">
+          Already have an account? <a href="/login" className="text-blue-400 underline hover:text-blue-300">Login</a>
         </p>
       </form>
     </main>
