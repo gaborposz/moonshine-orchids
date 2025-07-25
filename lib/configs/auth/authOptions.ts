@@ -1,7 +1,6 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import clientPromise from "@/lib/mongodb";
-// @ts-ignore: No types for bcrypt
 import { compare } from "bcrypt";
 import { MongoClient } from "mongodb";
 import { DB_NAME, USERS_COLLECTION } from "../db/constants";
@@ -37,7 +36,6 @@ export const authOptions = {
               throw new Error("User already exists");
             }
 
-            // @ts-ignore: No types for bcrypt
             const { hash } = await import('bcrypt');
             const hashedPassword = await hash(credentials.password, 10);
             
