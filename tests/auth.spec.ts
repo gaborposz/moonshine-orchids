@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { MongoClient } from 'mongodb';
 import { randomBytes } from 'crypto';
 
-const MONGO_URI = process.env.MONGO_DB_CONNECTION_STRING || 'mongodb+srv://WebPageUser:bNqUN2hNQux5ObAK@moonshinecluster-prod.bsp5mgb.mongodb.net/?retryWrites=true&w=majority&appName=MoonshineCluster-Prod';
+const MONGO_CONNECTION_STRING = process.env.MONGO_DB_CONNECTION_STRING || 'MongoDB connection string not set';
 const DB_NAME = 'orchids';
 const USERS_COLLECTION = 'users';
 
@@ -16,7 +16,7 @@ function generateTestUser() {
 }
 
 async function deleteTestUser(email: string) {
-  const client = new MongoClient(MONGO_URI);
+  const client = new MongoClient(MONGO_CONNECTION_STRING);
   try {
     await client.connect();
     const db = client.db(DB_NAME);
