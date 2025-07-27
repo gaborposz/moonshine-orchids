@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Moonshine Orchids" + (process.env.environment_name ? ` (${process.env.environment_name})` : ""),
+  title: "Moonshine Orchids" + (process.env.NEXT_PUBLIC_ENVIRONMENT_NAME ? ` (${process.env.NEXT_PUBLIC_ENVIRONMENT_NAME})` : ""),  
   description: "Orchid webshop prototype",
 };
 
