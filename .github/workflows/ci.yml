@@ -24,6 +24,10 @@ jobs:
         run: npm ci
 
       - name: Build application
+        env:
+          MONGO_DB_CONNECTION_STRING: ${{ secrets.MONGO_DB_CONNECTION_STRING }}
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          ENVIRONMENT_NAME: GitHubActions
         run: npm run build
 
       - name: Upload build artifacts
@@ -60,6 +64,10 @@ jobs:
           path: .next/
 
       - name: Run Playwright tests
+        env:
+          MONGO_DB_CONNECTION_STRING: ${{ secrets.MONGO_DB_CONNECTION_STRING }}
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          ENVIRONMENT_NAME: DEV
         run: npx playwright test
 
       - name: Upload Playwright report
