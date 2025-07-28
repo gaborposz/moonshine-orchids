@@ -58,6 +58,44 @@ test.describe.serial('Authentication flow', () => {
     await page.waitForURL('/login');
   });
 
+  test('should fail login with wrong password', async ({ page }) => {
+    await page.goto('/login');
+    
+    // Fill the login form with correct email but wrong password
+    await page.fill('input[name="email"]', testUser.email);
+    await page.fill('input[name="password"]', 'wrongpassword');
+    
+    // Submit the form
+    await page.click('button[type="submit"]');
+    
+    // Wait for error message
+    const errorElement = await page.waitForSelector('[data-testid="login-error"]');
+    expect(await errorElement.isVisible()).toBeTruthy();
+    
+    // Verify error message content
+    const errorText = await errorElement.textContent();
+    expect(errorText).toContain('Invalid password');
+  });
+
+  test('should fail login with wrong email and password', async ({ page }) => {
+    await page.goto('/login');
+    
+    // Fill the login form with wrong email and wrong password
+    await page.fill('input[name="email"]', 'nonexistent@example.com');
+    await page.fill('input[name="password"]', 'wrongpassword');
+    
+    // Submit the form
+    await page.click('button[type="submit"]');
+    
+    // Wait for error message
+    const errorElement = await page.waitForSelector('[data-testid="login-error"]');
+    expect(await errorElement.isVisible()).toBeTruthy();
+    
+    // Verify error message content
+    const errorText = await errorElement.textContent();
+    expect(errorText).toContain('No user found with this email');
+  });
+
   test('should login with registered user', async ({ page }) => {
     await page.goto('/login');
     
