@@ -1,0 +1,35 @@
+{
+  "Navigation": {
+    "home": "Főoldal",
+    "login": "Bejelentkezés",
+    "register": "Regisztráció",
+    "logout": "Kijelentkezés"
+  },
+  "HomePage": {
+    "title": "Üdvözöljük a Moonshine Orchids-nál!",
+    "checkingBackend": "Backend ellenőrzése...",
+    "backendOffline": "A backend offline"
+  },
+  "LoginPage": {
+    "title": "Bejelentkezés",
+    "emailPlaceholder": "E-mail",
+    "passwordPlaceholder": "Jelszó",
+    "loginButton": "Bejelentkezés",
+    "loggingIn": "Bejelentkezés...",
+    "unexpectedError": "Váratlan hiba történt",
+    "invalidCredentials": "Érvénytelen hitelesítő adatok",
+    "noAccount": "Nincs fiókja?",
+    "registerLink": "Regisztráció"
+  },
+  "RegisterPage": {
+    "title": "Regisztráció",
+    "namePlaceholder": "Név",
+    "emailPlaceholder": "E-mail",
+    "passwordPlaceholder": "Jelszó",
+    "registerButton": "Regisztráció",
+    "registering": "Regisztrálás...",
+    "registrationSuccess": "Sikeres regisztráció! Átirányítás a bejelentkezéshez...",
+    "haveAccount": "Már van fiókja?",
+    "loginLink": "Bejelentkezés"
+  }
+}

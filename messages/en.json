@@ -1,0 +1,35 @@
+{
+  "Navigation": {
+    "home": "Home",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout"
+  },
+  "HomePage": {
+    "title": "Welcome to Moonshine Orchids!",
+    "checkingBackend": "Checking backend...",
+    "backendOffline": "Backend is offline"
+  },
+  "LoginPage": {
+    "title": "Login",
+    "emailPlaceholder": "Email",
+    "passwordPlaceholder": "Password",
+    "loginButton": "Login",
+    "loggingIn": "Logging in...",
+    "unexpectedError": "An unexpected error occurred",
+    "invalidCredentials": "Invalid credentials",
+    "noAccount": "Don't have an account?",
+    "registerLink": "Register"
+  },
+  "RegisterPage": {
+    "title": "Register",
+    "namePlaceholder": "Name",
+    "emailPlaceholder": "Email",
+    "passwordPlaceholder": "Password",
+    "registerButton": "Register",
+    "registering": "Registering...",
+    "registrationSuccess": "Registration successful! Redirecting to login...",
+    "haveAccount": "Already have an account?",
+    "loginLink": "Login"
+  }
+}

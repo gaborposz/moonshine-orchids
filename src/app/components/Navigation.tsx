@@ -2,13 +2,21 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
+import { useTranslations, useLocale } from 'next-intl';
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
+  const locale = useLocale();
   const { data: session, status } = useSession();
+  const t = useTranslations('Navigation');
+
+  // Debug logging
+  console.log('Navigation - current locale:', locale);
+  console.log('Navigation - current pathname:', pathname);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -19,15 +27,19 @@ export default function Navigation() {
   };
 
   const isActive = (path: string) => {
-    return pathname === path;
+    return pathname === `/${locale}${path}` || (path === "/" && pathname === `/${locale}`);
+  };
+
+  const getLocalizedPath = (path: string) => {
+    return `/${locale}${path}`;
   };
 
   const navigationItems = [
-    { name: "Home", href: "/" },
-    { name: "Login", href: "/login", hideWhenAuthenticated: true },
-    { name: "Register", href: "/register", hideWhenAuthenticated: true },
+    { name: t('home'), href: "/" },
+    { name: t('login'), href: "/login", hideWhenAuthenticated: true },
+    { name: t('register'), href: "/register", hideWhenAuthenticated: true },
     { 
-      name: "Logout", 
+      name: t('logout'), 
       href: "#", 
       showWhenAuthenticated: true, 
       action: () => signOut({ callbackUrl: "/" }),
@@ -41,7 +53,7 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className="text-xl font-bold text-gray-900 dark:text-white">
+            <Link href={getLocalizedPath("/")} className="text-xl font-bold text-gray-900 dark:text-white">
               Moonshine Orchids
             </Link>
           </div>
@@ -72,7 +84,7 @@ export default function Navigation() {
               return (
                 <Link
                   key={item.name}
-                  href={item.href}
+                  href={getLocalizedPath(item.href)}
                   className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                     isActive(item.href)
                       ? "bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300"
@@ -83,8 +95,31 @@ export default function Navigation() {
                 </Link>
               );
             })}
+            
+            {/* Language Switcher */}
+            <div className="flex items-center space-x-2 ml-4 border-l border-gray-300 dark:border-gray-600 pl-4">
+              <Link
+                href="/en"
+                className={`px-2 py-1 text-xs font-medium rounded ${
+                  locale === 'en'
+                    ? 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300'
+                    : 'text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400'
+                }`}
+              >
+                EN
+              </Link>
+              <Link
+                href="/hu"
+                className={`px-2 py-1 text-xs font-medium rounded ${
+                  locale === 'hu'
+                    ? 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300'
+                    : 'text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400'
+                }`}
+              >
+                HU
+              </Link>
+            </div>
           </div>
-
           {/* Mobile menu button */}
           <div className="md:hidden">
             <button
@@ -160,7 +195,7 @@ export default function Navigation() {
             return (
               <Link
                 key={item.name}
-                href={item.href}
+                href={getLocalizedPath(item.href)}
                 onClick={closeMenu}
                 className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
                   isActive(item.href)
@@ -172,6 +207,33 @@ export default function Navigation() {
               </Link>
             );
           })}
+          
+          {/* Mobile Language Switcher */}
+          <div className="flex items-center space-x-2 pt-4 border-t border-gray-200 dark:border-gray-700 mt-4">
+            <span className="text-sm text-gray-600 dark:text-gray-400 px-3">Language:</span>
+            <Link
+              href="/en"
+              onClick={closeMenu}
+              className={`px-2 py-1 text-xs font-medium rounded ${
+                locale === 'en'
+                  ? 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300'
+                  : 'text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400'
+              }`}
+            >
+              EN
+            </Link>
+            <Link
+              href="/hu"
+              onClick={closeMenu}
+              className={`px-2 py-1 text-xs font-medium rounded ${
+                locale === 'hu'
+                  ? 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300'
+                  : 'text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400'
+              }`}
+            >
+              HU
+            </Link>
+          </div>
         </div>
       </div>
     </nav>
