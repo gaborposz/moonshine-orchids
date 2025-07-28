@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import UserMenu from "@/app/components/UserMenu";
 
 export default function Home() {
   const [backendStatus, setBackendStatus] = useState<string>("Checking backend...");
@@ -19,10 +18,9 @@ export default function Home() {
 
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1 className="text-4xl font-bold">Welcome to Moonshine Orchids!</h1>
-      <UserMenu />
-      <p className="mt-4 text-lg">{backendStatus}</p>
-    </main>
+    <div className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center p-24">
+      <h1 className="text-4xl font-bold text-center mb-8">Welcome to Moonshine Orchids!</h1>
+      <p className="text-lg text-center text-gray-600">{backendStatus}</p>
+    </div>
   );
 }

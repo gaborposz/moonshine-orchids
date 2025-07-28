@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { MongoClient } from 'mongodb';
 import { randomBytes } from 'crypto';
 
-const MONGO_CONNECTION_STRING = process.env.MONGO_DB_CONNECTION_STRING || 'MongoDB connection string not set';
+const MONGO_DB_CONNECTION_STRING = process.env.MONGO_DB_CONNECTION_STRING || 'MongoDB connection string not set';
 const DB_NAME = 'orchids';
 const USERS_COLLECTION = 'users';
 
@@ -16,7 +16,7 @@ function generateTestUser() {
 }
 
 async function deleteTestUser(email: string) {
-  const client = new MongoClient(MONGO_CONNECTION_STRING);
+  const client = new MongoClient(MONGO_DB_CONNECTION_STRING);
   try {
     await client.connect();
     const db = client.db(DB_NAME);
@@ -75,8 +75,8 @@ test.describe.serial('Authentication flow', () => {
       throw new Error(`Login failed with error: ${errorText}`);
     }
     
-    // If no error, wait for successful login by checking for user menu
-    const userMenu = await page.waitForSelector('data-testid=user-menu');
-    expect(await userMenu.isVisible()).toBeTruthy();
+    // If no error, wait for successful login by checking for logout button
+    const logoutButton = await page.waitForSelector('data-testid=logout-button');
+    expect(await logoutButton.isVisible()).toBeTruthy();
   });
 });

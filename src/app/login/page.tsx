@@ -44,7 +44,7 @@ function LoginContent() {
   const urlError = searchParams.get("error");
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-4">
+    <div className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center p-4">
       <form onSubmit={handleSubmit} className="w-full max-w-sm bg-gray-800 p-8 rounded shadow">
         <h2 className="text-2xl font-bold mb-4 text-white">Login</h2>
         <input
@@ -79,7 +79,7 @@ function LoginContent() {
           Don't have an account? <a href="/register" className="text-blue-400 underline hover:text-blue-300">Register</a>
         </p>
       </form>
-    </main>
+    </div>
   );
 }
 
